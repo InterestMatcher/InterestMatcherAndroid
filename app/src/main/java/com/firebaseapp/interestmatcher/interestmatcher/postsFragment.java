@@ -1,5 +1,6 @@
 package com.firebaseapp.interestmatcher.interestmatcher;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -7,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.firebase.client.DataSnapshot;
@@ -25,9 +27,9 @@ public class postsFragment extends Fragment {
     private ArrayList<Post> posts;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
+    public View onCreateView(final LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.post_fragment, parent, false);
-        ListView postsList = (ListView) view.findViewById(R.id.postsList);
+        final ListView postsList = (ListView) view.findViewById(R.id.postsList);
         posts = new ArrayList<>();
         populatePosts();
         adapter = new postsAdapter(this.getContext(), posts);
@@ -42,6 +44,17 @@ public class postsFragment extends Fragment {
             }
         });
 
+        postsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bundle bundle = new Bundle();
+                bundle.putString("firebaseKey", adapter.getItem(position).getID());
+                Intent intent = new Intent(getActivity(), PostDetailActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 
@@ -53,6 +66,7 @@ public class postsFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot eachPost : dataSnapshot.getChildren()){
                     Post singlePost = eachPost.getValue(Post.class);
+                    singlePost.setID(eachPost.getKey());
                     posts.add(singlePost);
                 }
                 adapter.notifyDataSetChanged();

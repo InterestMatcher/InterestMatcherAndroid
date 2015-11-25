@@ -19,6 +19,10 @@ public class Post {
 
     public String getID(){return ID;}
 
+    public void setID(String id) {
+        this.ID = id;
+    }
+
     public String getAuthor(){return author;}
 
     public String getContent(){return content;}
