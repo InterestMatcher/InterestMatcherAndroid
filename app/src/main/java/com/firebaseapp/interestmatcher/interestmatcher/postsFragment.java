@@ -1,6 +1,8 @@
 package com.firebaseapp.interestmatcher.interestmatcher;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +32,15 @@ public class postsFragment extends Fragment {
         populatePosts();
         adapter = new postsAdapter(this.getContext(), posts);
         postsList.setAdapter(adapter);
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.addPostFab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
         return view;
     }
