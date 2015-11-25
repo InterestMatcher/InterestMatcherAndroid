@@ -1,8 +1,11 @@
 package com.firebaseapp.interestmatcher.interestmatcher;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Created by tommypacker for HackIllinois' 2016 Clue Hunt
  */
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Post {
 
     private String ID;
