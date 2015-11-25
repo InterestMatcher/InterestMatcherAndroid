@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FragmentManager fragmentManager;
+    public static final String sharedPrefsName = "FBLoginPrefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

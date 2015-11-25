@@ -10,6 +10,7 @@ public class Post {
     private String content;
     private String date;
     private String title;
+    private String authorID;
 
     public Post(){}
 
@@ -22,5 +23,7 @@ public class Post {
     public String getDate(){return date;}
 
     public String getTitle(){return title;}
+
+    public String getAuthorID(){return authorID;}
 
 }

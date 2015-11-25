@@ -1,8 +1,10 @@
 package com.firebaseapp.interestmatcher.interestmatcher;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.SharedPreferencesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,12 +31,19 @@ import com.firebase.client.FirebaseError;
 public class LoginActivity extends AppCompatActivity {
 
     private CallbackManager callbackManager;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         Firebase.setAndroidContext(this);
         setContentView(R.layout.login_layout);
+
+        sharedPreferences = getSharedPreferences(MainActivity.sharedPrefsName, MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        if(sharedPreferences.getBoolean("hasLoggedIn", false))
+            nextActivity();
 
         callbackManager = CallbackManager.Factory.create();
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
@@ -43,16 +52,14 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
                 Toast.makeText(getApplicationContext(), "Facebook succeeded", Toast.LENGTH_LONG).show();
                 onFacebookAccessTokenChange(loginResult.getAccessToken());
+                editor.putBoolean("hasLoggedIn", true).commit();
             }
 
             @Override
             public void onCancel() {
-
             }
-
             @Override
             public void onError(FacebookException error) {
-
             }
         });
     }
