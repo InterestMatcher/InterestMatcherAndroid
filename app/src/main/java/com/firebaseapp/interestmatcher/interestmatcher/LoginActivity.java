@@ -8,6 +8,7 @@ import android.support.v4.content.SharedPreferencesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -17,11 +18,16 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by tommypacker for HackIllinois' 2016 Clue Hunt
@@ -31,8 +37,8 @@ import com.firebase.client.FirebaseError;
 public class LoginActivity extends AppCompatActivity {
 
     private CallbackManager callbackManager;
-    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+    private LoginButton loginButton;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -40,17 +46,19 @@ public class LoginActivity extends AppCompatActivity {
         Firebase.setAndroidContext(this);
         setContentView(R.layout.login_layout);
 
-        sharedPreferences = getSharedPreferences(MainActivity.sharedPrefsName, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.sharedPrefsName, MODE_PRIVATE);
         editor = sharedPreferences.edit();
         if(sharedPreferences.getBoolean("hasLoggedIn", false))
             nextActivity();
 
         callbackManager = CallbackManager.Factory.create();
-        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Toast.makeText(getApplicationContext(), "Facebook succeeded", Toast.LENGTH_LONG).show();
+                loginButton.setVisibility(View.INVISIBLE);
+                makeGraphRequest(loginResult.getAccessToken());
                 onFacebookAccessTokenChange(loginResult.getAccessToken());
                 editor.putBoolean("hasLoggedIn", true).commit();
             }
@@ -88,6 +96,30 @@ public class LoginActivity extends AppCompatActivity {
         /* Logged out of Facebook so do a logout from the Firebase app */
             ref.unauth();
         }
+    }
+
+    private void makeGraphRequest(AccessToken accessToken){
+        GraphRequest request = GraphRequest.newMeRequest(
+                accessToken,
+                new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(
+                            JSONObject object,
+                            GraphResponse response) {
+                        // Application code
+                        String userName;
+                        try{
+                            userName = object.getString("name");
+                        }catch (JSONException e){
+                            userName = "Name";
+                        }
+                        editor.putString("userName", userName).commit();
+                    }
+                });
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "name");
+        request.setParameters(parameters);
+        request.executeAsync();
     }
 
     private void nextActivity(){
