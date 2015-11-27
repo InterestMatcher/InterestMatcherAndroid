@@ -1,16 +1,21 @@
 package com.firebaseapp.interestmatcher.interestmatcher.ChatRoom;
 
+import android.app.Dialog;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebaseapp.interestmatcher.interestmatcher.MainActivity;
 import com.firebaseapp.interestmatcher.interestmatcher.R;
 
 import java.util.ArrayList;
@@ -22,6 +27,8 @@ public class chatRoomFragment extends Fragment {
 
     private ArrayList<chatMessage> chatMessages;
     private chatAdapter adapter;
+    private Dialog dialog;
+    private EditText messageContent;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
@@ -31,6 +38,25 @@ public class chatRoomFragment extends Fragment {
         populateChatRoom();
         adapter = new chatAdapter(getContext(), chatMessages);
         chatList.setAdapter(adapter);
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.addChatFab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.new_chat_dialog);
+                dialog.setTitle("New Chat");
+                messageContent = (EditText) dialog.findViewById(R.id.newChatContent);
+                Button submitPostButton = (Button) dialog.findViewById(R.id.submitNewPost);
+                submitPostButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        makeNewPost();
+                    }
+                });
+                dialog.show();
+            }
+        });
 
         return view;
     }
@@ -47,23 +73,33 @@ public class chatRoomFragment extends Fragment {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
             }
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
             }
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
-
             }
         });
+    }
+
+    private void makeNewPost(){
+        Firebase ref = new Firebase("https://interestmatcher.firebaseio.com/chatrooms/public");
+
+        String messageBody = messageContent.getText().toString();
+        chatMessage newChat = new chatMessage();
+        newChat.setContent(messageBody);
+        newChat.setAuthor(MainActivity.userName);
+        newChat.setFacebookID(MainActivity.id);
+
+        ref.push().setValue(newChat);
+
+        dialog.dismiss();
     }
 }
