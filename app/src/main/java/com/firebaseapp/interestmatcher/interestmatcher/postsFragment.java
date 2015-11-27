@@ -1,5 +1,6 @@
 package com.firebaseapp.interestmatcher.interestmatcher;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.firebase.client.DataSnapshot;
@@ -25,6 +28,8 @@ public class postsFragment extends Fragment {
 
     private postsAdapter adapter;
     private ArrayList<Post> posts;
+    private EditText title;
+    private EditText content;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
@@ -39,8 +44,19 @@ public class postsFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Dialog dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.new_post_dialog);
+                dialog.setTitle("New Post");
+                title = (EditText) dialog.findViewById(R.id.newPostTitle);
+                content = (EditText) dialog.findViewById(R.id.newPostContent);
+                Button submitPostButton = (Button) dialog.findViewById(R.id.submitNewPost);
+                submitPostButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        makeNewPost();
+                    }
+                });
+                dialog.show();
             }
         });
 
@@ -64,7 +80,7 @@ public class postsFragment extends Fragment {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot eachPost : dataSnapshot.getChildren()){
+                for (DataSnapshot eachPost : dataSnapshot.getChildren()) {
                     Post singlePost = eachPost.getValue(Post.class);
                     singlePost.setID(eachPost.getKey());
                     posts.add(singlePost);
@@ -77,5 +93,17 @@ public class postsFragment extends Fragment {
 
             }
         });
+    }
+
+    private void makeNewPost(){
+        String newPostTitle = title.getText().toString();
+        String newPostContent = content.getText().toString();
+        Post newPost = new Post();
+        newPost.setTitle(newPostTitle);
+        newPost.setContent(newPostContent);
+        newPost.setAuthor(MainActivity.userName);
+
+        Firebase ref = new Firebase("https://interestmatcher.firebaseio.com/posts/chill");
+        ref.push().setValue(newPost);
     }
 }

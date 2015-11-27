@@ -18,8 +18,7 @@ public class profileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.profile_fragment, parent, false);
         TextView name = (TextView) view.findViewById(R.id.name);
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(MainActivity.sharedPrefsName, Context.MODE_PRIVATE);
-        name.setText(sharedPreferences.getString("userName", "name"));
+        name.setText(MainActivity.userName);
         return view;
     }
 }
