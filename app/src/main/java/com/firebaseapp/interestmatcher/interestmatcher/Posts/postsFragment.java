@@ -40,7 +40,7 @@ public class postsFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.post_fragment, parent, false);
-        final ListView postsList = (ListView) view.findViewById(R.id.postsList);
+        ListView postsList = (ListView) view.findViewById(R.id.postsList);
         posts = new ArrayList<>();
         populatePosts();
         adapter = new postsAdapter(this.getContext(), posts);
@@ -83,37 +83,27 @@ public class postsFragment extends Fragment {
     private void populatePosts(){
         Firebase ref = new Firebase("https://interestmatcher.firebaseio.com/posts/chill");
 
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot eachPost : dataSnapshot.getChildren()) {
-                    Post singlePost = eachPost.getValue(Post.class);
-                    singlePost.setID(eachPost.getKey());
-                    posts.add(singlePost);
-                }
-                adapter.notifyDataSetChanged();
-            }
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-            }
-        });
-
         ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Post postAdded = dataSnapshot.getValue(Post.class);
+                postAdded.setID(dataSnapshot.getKey());
                 posts.add(postAdded);
                 adapter.notifyDataSetChanged();
             }
+
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
             }
+
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
             }
+
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
             }
+
             @Override
             public void onCancelled(FirebaseError firebaseError) {
             }

@@ -1,4 +1,4 @@
-package com.firebaseapp.interestmatcher.interestmatcher.Posts;
+package com.firebaseapp.interestmatcher.interestmatcher.ChatRoom;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,19 +14,21 @@ import java.util.ArrayList;
 /**
  * Created by tommypacker for HackIllinois' 2016 Clue Hunt
  */
-public class postsAdapter extends ArrayAdapter<Post> {
-    public postsAdapter(Context context, ArrayList<Post> Posts){
-        super(context, 0, Posts);
+public class chatAdapter extends ArrayAdapter<Chat> {
+
+    public chatAdapter(Context context, ArrayList<Chat> chats){
+        super(context, 0, chats);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
-        Post post = getItem(position);
+        Chat chat = getItem(position);
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.post_chat_item, parent, false);
         }
-        TextView postTitle = (TextView) convertView.findViewById(R.id.postTitle);
-        postTitle.setText(post.getTitle());
+        TextView chatContent = (TextView) convertView.findViewById(R.id.postTitle);
+        chatContent.setText(chat.getContent());
         return convertView;
     }
+
 }
