@@ -3,12 +3,12 @@ package com.firebaseapp.interestmatcher.interestmatcher.ChatRoom;
 /**
  * Created by tommypacker for HackIllinois' 2016 Clue Hunt
  */
-public class Chat {
+public class chatMessage {
     private String author;
     private String content;
     private String facebookID;
 
-    public Chat(){}
+    public chatMessage(){}
 
     public String getAuthor(){return author;}
 

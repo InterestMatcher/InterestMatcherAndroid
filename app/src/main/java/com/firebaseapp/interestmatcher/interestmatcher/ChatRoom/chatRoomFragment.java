@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class chatRoomFragment extends Fragment {
 
-    private ArrayList<Chat> chats;
+    private ArrayList<chatMessage> chatMessages;
     private chatAdapter adapter;
 
     @Override

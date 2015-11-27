@@ -14,20 +14,20 @@ import java.util.ArrayList;
 /**
  * Created by tommypacker for HackIllinois' 2016 Clue Hunt
  */
-public class chatAdapter extends ArrayAdapter<Chat> {
+public class chatAdapter extends ArrayAdapter<chatMessage> {
 
-    public chatAdapter(Context context, ArrayList<Chat> chats){
-        super(context, 0, chats);
+    public chatAdapter(Context context, ArrayList<chatMessage> chatMessages){
+        super(context, 0, chatMessages);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
-        Chat chat = getItem(position);
+        chatMessage chatMessage = getItem(position);
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.post_chat_item, parent, false);
         }
         TextView chatContent = (TextView) convertView.findViewById(R.id.postTitle);
-        chatContent.setText(chat.getContent());
+        chatContent.setText(chatMessage.getContent());
         return convertView;
     }
 
