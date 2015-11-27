@@ -1,4 +1,4 @@
-package com.firebaseapp.interestmatcher.interestmatcher;
+package com.firebaseapp.interestmatcher.interestmatcher.Posts;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.firebaseapp.interestmatcher.interestmatcher.Posts.Post;
+import com.firebaseapp.interestmatcher.interestmatcher.R;
 
 import java.util.ArrayList;
 

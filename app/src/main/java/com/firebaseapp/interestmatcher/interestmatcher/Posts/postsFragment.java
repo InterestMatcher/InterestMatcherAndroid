@@ -1,10 +1,9 @@
-package com.firebaseapp.interestmatcher.interestmatcher;
+package com.firebaseapp.interestmatcher.interestmatcher.Posts;
 
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +18,11 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.firebaseapp.interestmatcher.interestmatcher.MainActivity;
+import com.firebaseapp.interestmatcher.interestmatcher.Posts.Post;
+import com.firebaseapp.interestmatcher.interestmatcher.Posts.PostDetailActivity;
+import com.firebaseapp.interestmatcher.interestmatcher.Posts.postsAdapter;
+import com.firebaseapp.interestmatcher.interestmatcher.R;
 
 import java.util.ArrayList;
 

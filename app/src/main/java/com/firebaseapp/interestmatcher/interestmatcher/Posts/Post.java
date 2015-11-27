@@ -1,4 +1,4 @@
-package com.firebaseapp.interestmatcher.interestmatcher;
+package com.firebaseapp.interestmatcher.interestmatcher.Posts;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

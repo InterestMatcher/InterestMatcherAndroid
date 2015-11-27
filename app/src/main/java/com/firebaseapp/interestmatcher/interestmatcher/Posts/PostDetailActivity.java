@@ -1,4 +1,4 @@
-package com.firebaseapp.interestmatcher.interestmatcher;
+package com.firebaseapp.interestmatcher.interestmatcher.Posts;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.firebaseapp.interestmatcher.interestmatcher.R;
 
 /**
  * Created by tommypacker for HackIllinois' 2016 Clue Hunt
