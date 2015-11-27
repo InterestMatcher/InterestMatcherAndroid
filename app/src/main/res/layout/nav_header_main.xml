@@ -20,10 +20,11 @@
         android:src="@android:drawable/sym_def_app_icon" /> -->
 
     <TextView
+        android:id="@+id/navDrawerName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Tommy Yu"
+        android:text="Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
