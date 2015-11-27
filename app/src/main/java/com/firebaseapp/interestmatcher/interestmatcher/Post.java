@@ -45,4 +45,8 @@ public class Post {
 
     public String getAuthorID(){return authorID;}
 
+    public void setAuthorID(String authorID){
+        this.authorID = authorID;
+    }
+
 }

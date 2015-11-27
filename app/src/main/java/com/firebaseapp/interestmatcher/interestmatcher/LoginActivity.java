@@ -107,17 +107,21 @@ public class LoginActivity extends AppCompatActivity {
                             JSONObject object,
                             GraphResponse response) {
                         // Application code
-                        String userName;
+                        String userName, id;
                         try{
                             userName = object.getString("name");
+                            id = object.getString("id");
                         }catch (JSONException e){
                             userName = "Name";
+                            id = "ID";
                         }
-                        editor.putString("userName", userName).commit();
+                        editor.putString("userName", userName);
+                        editor.putString("id", id);
+                        editor.commit();
                     }
                 });
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "name");
+        parameters.putString("fields", "id,name");
         request.setParameters(parameters);
         request.executeAsync();
     }

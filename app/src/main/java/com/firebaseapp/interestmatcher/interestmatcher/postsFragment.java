@@ -30,6 +30,7 @@ public class postsFragment extends Fragment {
     private ArrayList<Post> posts;
     private EditText title;
     private EditText content;
+    private Dialog dialog;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
@@ -44,7 +45,7 @@ public class postsFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Dialog dialog = new Dialog(getContext());
+                dialog = new Dialog(getContext());
                 dialog.setContentView(R.layout.new_post_dialog);
                 dialog.setTitle("New Post");
                 title = (EditText) dialog.findViewById(R.id.newPostTitle);
@@ -96,14 +97,23 @@ public class postsFragment extends Fragment {
     }
 
     private void makeNewPost(){
+        Firebase ref = new Firebase("https://interestmatcher.firebaseio.com/posts/chill");
+        Firebase postRef = ref.push();
+
+        Post newPost = new Post();
+
         String newPostTitle = title.getText().toString();
         String newPostContent = content.getText().toString();
-        Post newPost = new Post();
+        String id = postRef.getKey();
+
+        newPost.setID(id);
         newPost.setTitle(newPostTitle);
         newPost.setContent(newPostContent);
         newPost.setAuthor(MainActivity.userName);
+        newPost.setAuthorID(MainActivity.id);
 
-        Firebase ref = new Firebase("https://interestmatcher.firebaseio.com/posts/chill");
-        ref.push().setValue(newPost);
+        postRef.setValue(newPost);
+
+        dialog.dismiss();
     }
 }

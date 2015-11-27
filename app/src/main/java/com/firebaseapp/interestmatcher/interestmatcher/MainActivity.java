@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity
 
     private FragmentManager fragmentManager;
     public static final String sharedPrefsName = "FBLoginPrefs";
-    public static String userName;
+    public static String userName, id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity
         fragmentManager = getSupportFragmentManager();
 
         userName = getSharedPreferences(sharedPrefsName, MODE_PRIVATE).getString("userName", "name");
+        id = getSharedPreferences(sharedPrefsName, MODE_PRIVATE).getString("id", "id");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
