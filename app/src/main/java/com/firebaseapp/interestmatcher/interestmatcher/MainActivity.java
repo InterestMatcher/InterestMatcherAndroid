@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.firebase.client.Firebase;
+import com.firebaseapp.interestmatcher.interestmatcher.ChatRoom.chatRoomFragment;
 import com.firebaseapp.interestmatcher.interestmatcher.Posts.postsFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -85,7 +86,9 @@ public class MainActivity extends AppCompatActivity
             swapFragment(new profileFragment());
         } else if (id == R.id.nav_map) {
             swapFragment(new mapFragment());
-        } else if (id == R.id.nav_settings) {
+        }else if (id == R.id.nav_chatroom){
+            swapFragment(new chatRoomFragment());
+        }else if (id == R.id.nav_settings) {
 
         }
 
