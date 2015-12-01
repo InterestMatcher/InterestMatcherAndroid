@@ -23,7 +23,7 @@ public class postsAdapter extends ArrayAdapter<Post> {
     public View getView(int position, View convertView, ViewGroup parent){
         Post post = getItem(position);
         if(convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.post_chat_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.post_item, parent, false);
         }
         TextView postTitle = (TextView) convertView.findViewById(R.id.postTitle);
         postTitle.setText(post.getTitle());

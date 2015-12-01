@@ -24,10 +24,12 @@ public class chatAdapter extends ArrayAdapter<chatMessage> {
     public View getView(int position, View convertView, ViewGroup parent){
         chatMessage chatMessage = getItem(position);
         if(convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.post_chat_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.chat_item, parent, false);
         }
-        TextView chatContent = (TextView) convertView.findViewById(R.id.postTitle);
+        TextView chatContent = (TextView) convertView.findViewById(R.id.chatTitle);
+        TextView chatAuthor = (TextView) convertView.findViewById(R.id.chattAuthor);
         chatContent.setText(chatMessage.getContent());
+        chatAuthor.setText(chatMessage.getAuthor());
         return convertView;
     }
 

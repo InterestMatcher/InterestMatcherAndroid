@@ -14,5 +14,4 @@
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
         android:text="Title"/>
 
-
 </LinearLayout>
