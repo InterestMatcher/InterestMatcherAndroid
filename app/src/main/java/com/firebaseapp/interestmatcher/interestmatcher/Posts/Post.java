@@ -5,10 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 /**
  * Created by tommypacker for HackIllinois' 2016 Clue Hunt
  */
-@JsonIgnoreProperties(ignoreUnknown=true)
 public class Post {
 
-    private String ID;
+    private String id;
     private String author;
     private String content;
     private String date;
@@ -17,10 +16,10 @@ public class Post {
 
     public Post(){}
 
-    public String getID(){return ID;}
+    public String getId(){return id;}
 
-    public void setID(String id) {
-        this.ID = id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getAuthor(){return author;}

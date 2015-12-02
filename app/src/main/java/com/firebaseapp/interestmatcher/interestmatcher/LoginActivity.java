@@ -19,7 +19,9 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
+import com.facebook.GraphRequestAsyncTask;
 import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.firebase.client.AuthData;
@@ -60,12 +62,13 @@ public class LoginActivity extends AppCompatActivity {
                 loginButton.setVisibility(View.INVISIBLE);
                 makeGraphRequest(loginResult.getAccessToken());
                 onFacebookAccessTokenChange(loginResult.getAccessToken());
-                editor.putBoolean("hasLoggedIn", true).commit();
+                editor.putBoolean("hasLoggedIn", true).apply();
             }
 
             @Override
             public void onCancel() {
             }
+
             @Override
             public void onError(FacebookException error) {
             }
@@ -107,11 +110,11 @@ public class LoginActivity extends AppCompatActivity {
                             JSONObject object,
                             GraphResponse response) {
                         // Application code
-                        String userName, id;
-                        try{
+                        String userName, id, profpicURL;
+                        try {
                             userName = object.getString("name");
                             id = object.getString("id");
-                        }catch (JSONException e){
+                        } catch (JSONException e) {
                             userName = "Name";
                             id = "ID";
                         }
@@ -121,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "id,name");
+        parameters.putString("fields", "id,name,picture");
         request.setParameters(parameters);
         request.executeAsync();
     }

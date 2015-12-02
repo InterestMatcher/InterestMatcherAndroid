@@ -25,6 +25,7 @@ import com.firebaseapp.interestmatcher.interestmatcher.Posts.postsAdapter;
 import com.firebaseapp.interestmatcher.interestmatcher.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by tommypacker for HackIllinois' 2016 Clue Hunt
@@ -70,7 +71,7 @@ public class postsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bundle bundle = new Bundle();
-                bundle.putString("firebaseKey", adapter.getItem(position).getID());
+                bundle.putString("firebaseKey", adapter.getItem(position).getId());
                 Intent intent = new Intent(getActivity(), PostDetailActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
@@ -87,7 +88,7 @@ public class postsFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Post postAdded = dataSnapshot.getValue(Post.class);
-                postAdded.setID(dataSnapshot.getKey());
+                postAdded.setId(dataSnapshot.getKey());
                 posts.add(postAdded);
                 adapter.notifyDataSetChanged();
             }
@@ -120,7 +121,7 @@ public class postsFragment extends Fragment {
         String newPostContent = content.getText().toString();
         String id = postRef.getKey();
 
-        newPost.setID(id);
+        newPost.setId(id);
         newPost.setTitle(newPostTitle);
         newPost.setContent(newPostContent);
         newPost.setAuthor(MainActivity.userName);
