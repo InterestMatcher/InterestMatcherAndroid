@@ -27,7 +27,7 @@ public class chatAdapter extends ArrayAdapter<chatMessage> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.chat_item, parent, false);
         }
         TextView chatContent = (TextView) convertView.findViewById(R.id.chatTitle);
-        TextView chatAuthor = (TextView) convertView.findViewById(R.id.chattAuthor);
+        TextView chatAuthor = (TextView) convertView.findViewById(R.id.chatAuthor);
         chatContent.setText(chatMessage.getContent());
         chatAuthor.setText(chatMessage.getAuthor());
         return convertView;
