@@ -92,7 +92,7 @@ public class postsFragment extends Fragment {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Post postAdded = dataSnapshot.getValue(Post.class);
                 postAdded.setId(dataSnapshot.getKey());
-                posts.add(postAdded);
+                posts.add(0, postAdded);
                 adapter.notifyDataSetChanged();
             }
 
