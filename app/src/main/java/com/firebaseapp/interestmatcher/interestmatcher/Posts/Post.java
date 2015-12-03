@@ -40,6 +40,8 @@ public class Post {
 
     public String getDate(){return date;}
 
+    public void setDate(String date){this.date = date;}
+
     public String getTitle(){return title;}
 
     public String getAuthorID(){return authorID;}

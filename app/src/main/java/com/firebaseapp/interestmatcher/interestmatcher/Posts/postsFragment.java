@@ -24,8 +24,11 @@ import com.firebaseapp.interestmatcher.interestmatcher.Posts.PostDetailActivity;
 import com.firebaseapp.interestmatcher.interestmatcher.Posts.postsAdapter;
 import com.firebaseapp.interestmatcher.interestmatcher.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by tommypacker for HackIllinois' 2016 Clue Hunt
@@ -126,9 +129,17 @@ public class postsFragment extends Fragment {
         newPost.setContent(newPostContent);
         newPost.setAuthor(MainActivity.userName);
         newPost.setAuthorID(MainActivity.id);
+        newPost.setDate(getCurrentDate());
 
         postRef.setValue(newPost);
 
         dialog.dismiss();
+    }
+
+    private String getCurrentDate(){
+        long currentTime = System.currentTimeMillis();
+        Date currentDate = new Date(currentTime);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.US);
+        return sdf.format(currentDate);
     }
 }
