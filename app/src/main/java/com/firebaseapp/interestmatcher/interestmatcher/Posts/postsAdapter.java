@@ -26,7 +26,10 @@ public class postsAdapter extends ArrayAdapter<Post> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.post_item, parent, false);
         }
         TextView postTitle = (TextView) convertView.findViewById(R.id.postTitle);
+        TextView postAuthor = (TextView) convertView.findViewById(R.id.postAuthor);
+
         postTitle.setText(post.getTitle());
+        postAuthor.setText(post.getAuthor());
         return convertView;
     }
 }

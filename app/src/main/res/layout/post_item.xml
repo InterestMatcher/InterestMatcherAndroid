@@ -7,11 +7,23 @@
         android:id="@+id/postTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:gravity="center_vertical"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
-        android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        android:textSize="17sp"
         android:text="Title"/>
+
+    <TextView
+        android:id="@+id/postAuthor"
+        android:text="Author"
+        android:textSize="13sp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
