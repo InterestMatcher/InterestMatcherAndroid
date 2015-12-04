@@ -100,8 +100,6 @@ public class MainActivity extends AppCompatActivity
             swapFragment(new mapFragment());
         }else if (id == R.id.nav_chatroom){
             swapFragment(new chatRoomFragment());
-        }else if (id == R.id.nav_settings) {
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
