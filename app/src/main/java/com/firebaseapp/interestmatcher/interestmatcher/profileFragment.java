@@ -22,7 +22,7 @@ public class profileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.profile_fragment, parent, false);
-        String profUrl = "https://graph.facebook.com/" + MainActivity.id + "/picture?type=normal";
+        String profUrl = "https://graph.facebook.com/" + MainActivity.id + "/picture?type=large";
         //String profUrl = "http://pngimg.com/upload/duck_PNG4998.png";
 
         TextView name = (TextView) view.findViewById(R.id.name);
