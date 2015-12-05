@@ -1,17 +1,22 @@
 package com.firebaseapp.interestmatcher.interestmatcher.Posts;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -76,16 +81,17 @@ public class PostDetailActivity extends AppCompatActivity {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot postDetail: dataSnapshot.getChildren()){
-                    if(postDetail.getKey().equals("title")){
+                for (DataSnapshot postDetail : dataSnapshot.getChildren()) {
+                    if (postDetail.getKey().equals("title")) {
                         postTitle.setText(postDetail.getValue().toString());
-                    }else if(postDetail.getKey().equals("author")){
+                    } else if (postDetail.getKey().equals("author")) {
                         postAuthor.setText(postDetail.getValue().toString());
-                    }else if(postDetail.getKey().equals("content")){
+                    } else if (postDetail.getKey().equals("content")) {
                         postContent.setText(postDetail.getValue().toString());
                     }
                 }
             }
+
             @Override
             public void onCancelled(FirebaseError firebaseError) {
             }
@@ -125,13 +131,19 @@ public class PostDetailActivity extends AppCompatActivity {
         Firebase pushCommentRef = newCommentRef.push();
 
         String commentContent = commentBox.getText().toString();
-        Comment newComment = new Comment();
-        newComment.setContent(commentContent);
-        newComment.setAuthor(MainActivity.userName);
-        newComment.setAuthorID(MainActivity.id);
-        newComment.setDate(getCurrentDate());
+        if(commentContent.length() <= 0){
+            Toast.makeText(getApplicationContext(), "Please enter a valid comment", Toast.LENGTH_SHORT).show();
+        }else{
+            Comment newComment = new Comment();
+            newComment.setContent(commentContent);
+            newComment.setAuthor(MainActivity.userName);
+            newComment.setAuthorID(MainActivity.id);
+            newComment.setDate(getCurrentDate());
 
-        pushCommentRef.setValue(newComment);
+            pushCommentRef.setValue(newComment);
+        }
+        commentBox.getText().clear();
+        hideSoftKeyboard(commentBox);
     }
 
     private String getCurrentDate(){
@@ -139,6 +151,11 @@ public class PostDetailActivity extends AppCompatActivity {
         Date currentDate = new Date(currentTime);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.US);
         return sdf.format(currentDate);
+    }
+
+    public void hideSoftKeyboard(View view){
+        InputMethodManager imm =(InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     @Override
