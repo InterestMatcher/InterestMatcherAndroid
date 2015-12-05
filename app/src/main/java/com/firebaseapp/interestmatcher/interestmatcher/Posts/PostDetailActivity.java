@@ -5,11 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -50,7 +47,7 @@ public class PostDetailActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.post_detail_frament);
+        setContentView(R.layout.post_detail_layout);
 
         postTitle = (TextView) findViewById(R.id.postDetailTitle);
         postAuthor = (TextView) findViewById(R.id.postDetailAuthor);
