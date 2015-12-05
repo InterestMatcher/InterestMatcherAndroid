@@ -105,9 +105,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_profile) {
             swapFragment(new profileFragment());
             drawer.closeDrawer(GravityCompat.START);
-        } else if (id == R.id.nav_map) {
-            swapFragment(new mapFragment());
-            drawer.closeDrawer(GravityCompat.START);
         }else if (id == R.id.nav_chatroom){
             swapFragment(new chatRoomFragment());
             drawer.closeDrawer(GravityCompat.START);

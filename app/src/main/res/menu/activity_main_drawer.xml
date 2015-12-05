@@ -11,10 +11,6 @@
             android:icon="@drawable/ic_menu_profile"
             android:title="Profile" />
         <item
-            android:id="@+id/nav_map"
-            android:icon="@drawable/ic_menu_map"
-            android:title="Map" />
-        <item
             android:id="@+id/nav_chatroom"
             android:title="Chat Room"
             android:icon="@drawable/ic_menu_chat"/>
