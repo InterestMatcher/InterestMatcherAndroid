@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -93,13 +94,16 @@ public class chatRoomFragment extends Fragment {
         Firebase ref = new Firebase("https://interestmatcher.firebaseio.com/chatrooms/public");
 
         String messageBody = messageContent.getText().toString();
-        chatMessage newChat = new chatMessage();
-        newChat.setContent(messageBody);
-        newChat.setAuthor(MainActivity.userName);
-        newChat.setFacebookID(MainActivity.id);
+        if(messageBody.length() == 0){
+            Toast.makeText(getContext(), "Please enter a valid message", Toast.LENGTH_SHORT).show();
+        }else{
+            chatMessage newChat = new chatMessage();
+            newChat.setContent(messageBody);
+            newChat.setAuthor(MainActivity.userName);
+            newChat.setFacebookID(MainActivity.id);
 
-        ref.push().setValue(newChat);
-
-        dialog.dismiss();
+            ref.push().setValue(newChat);
+            dialog.dismiss();
+        }
     }
 }

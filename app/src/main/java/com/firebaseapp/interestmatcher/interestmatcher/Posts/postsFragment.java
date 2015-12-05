@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -122,18 +123,21 @@ public class postsFragment extends Fragment {
 
         String newPostTitle = title.getText().toString();
         String newPostContent = content.getText().toString();
-        String id = postRef.getKey();
+        if(newPostContent.length() == 0 || newPostTitle.length() == 0){
+            Toast.makeText(getContext(), "Please enter a valid post", Toast.LENGTH_SHORT).show();
+        }else{
+            String id = postRef.getKey();
 
-        newPost.setId(id);
-        newPost.setTitle(newPostTitle);
-        newPost.setContent(newPostContent);
-        newPost.setAuthor(MainActivity.userName);
-        newPost.setAuthorID(MainActivity.id);
-        newPost.setDate(getCurrentDate());
+            newPost.setId(id);
+            newPost.setTitle(newPostTitle);
+            newPost.setContent(newPostContent);
+            newPost.setAuthor(MainActivity.userName);
+            newPost.setAuthorID(MainActivity.id);
+            newPost.setDate(getCurrentDate());
 
-        postRef.setValue(newPost);
-
-        dialog.dismiss();
+            postRef.setValue(newPost);
+            dialog.dismiss();
+        }
     }
 
     private String getCurrentDate(){
