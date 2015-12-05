@@ -95,7 +95,7 @@ public class chatRoomFragment extends Fragment {
 
         String messageBody = messageContent.getText().toString();
         String adjusted = messageBody.trim();
-        if(adjusted.length() == 0){
+        if(adjusted.length() == 0 || adjusted.length() > 141){
             Toast.makeText(getContext(), "Please enter a valid message", Toast.LENGTH_SHORT).show();
         }else{
             chatMessage newChat = new chatMessage();

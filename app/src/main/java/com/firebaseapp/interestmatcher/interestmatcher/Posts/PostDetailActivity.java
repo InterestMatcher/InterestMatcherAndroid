@@ -128,7 +128,7 @@ public class PostDetailActivity extends AppCompatActivity {
         Firebase pushCommentRef = newCommentRef.push();
 
         String commentContent = commentBox.getText().toString().trim();
-        if(commentContent.length() <= 0){
+        if(commentContent.length() <= 0 || commentContent.length() > 141){ //we're one better than Twitter
             Toast.makeText(getApplicationContext(), "Please enter a valid comment", Toast.LENGTH_SHORT).show();
         }else{
             Comment newComment = new Comment();

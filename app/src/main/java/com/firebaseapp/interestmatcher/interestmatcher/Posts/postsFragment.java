@@ -123,7 +123,7 @@ public class postsFragment extends Fragment {
 
         String newPostTitle = title.getText().toString().trim();
         String newPostContent = content.getText().toString().trim();
-        if(newPostContent.length() == 0 || newPostTitle.length() == 0){
+        if(newPostContent.length() == 0 || newPostTitle.length() == 0 || newPostTitle.length() > 50 || newPostContent.length() > 2000){
             Toast.makeText(getContext(), "Please enter a valid post", Toast.LENGTH_SHORT).show();
         }else{
             String id = postRef.getKey();
