@@ -20,7 +20,8 @@
         <ListView
             android:id="@+id/chatList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:listSelector="@android:color/transparent"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/addChatFab"

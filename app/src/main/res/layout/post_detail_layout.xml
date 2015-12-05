@@ -21,16 +21,23 @@
         android:text="Author"
         android:textSize="15sp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="0dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_width="220dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="1dip"
+        android:background="@android:color/darker_gray" />
 
     <TextView
         android:id="@+id/postDetailContent"
         android:text="Content"
         android:textSize="27sp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -63,7 +70,8 @@
         android:id="@+id/commentList"
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:listSelector="@android:color/transparent">
     </ListView>
 
 </LinearLayout>

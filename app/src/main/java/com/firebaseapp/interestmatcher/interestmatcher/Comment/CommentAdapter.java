@@ -33,4 +33,6 @@ public class CommentAdapter extends ArrayAdapter<Comment> {
         commentAuthor.setText(comment.getAuthor());
         return convertView;
     }
+
+
 }
