@@ -68,7 +68,7 @@ public class chatRoomFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 chatMessage eachMessage = dataSnapshot.getValue(chatMessage.class);
-                chatMessages.add(eachMessage);
+                chatMessages.add(0, eachMessage);
                 adapter.notifyDataSetChanged();
             }
 
