@@ -10,7 +10,8 @@
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:theme="@style/AppTheme"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:inputType="textCapSentences"/>
 
     <EditText
         android:id="@+id/newPostContent"
@@ -18,7 +19,8 @@
         android:theme="@style/AppTheme"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:inputType="textCapSentences"/>
 
     <Button
         android:id="@+id/submitNewPost"
