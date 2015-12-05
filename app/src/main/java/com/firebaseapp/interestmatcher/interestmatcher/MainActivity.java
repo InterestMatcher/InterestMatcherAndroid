@@ -1,5 +1,7 @@
 package com.firebaseapp.interestmatcher.interestmatcher;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
 import com.firebase.client.Firebase;
 import com.firebaseapp.interestmatcher.interestmatcher.ChatRoom.chatRoomFragment;
 import com.firebaseapp.interestmatcher.interestmatcher.Posts.postsFragment;
@@ -22,6 +25,7 @@ public class MainActivity extends AppCompatActivity
 
     private FragmentManager fragmentManager;
     public static final String sharedPrefsName = "FBLoginPrefs";
+    private SharedPreferences.Editor editor;
     public static String userName, id;
     private TextView navDrawerName;
 
@@ -36,6 +40,8 @@ public class MainActivity extends AppCompatActivity
 
         userName = getSharedPreferences(sharedPrefsName, MODE_PRIVATE).getString("userName", "name");
         id = getSharedPreferences(sharedPrefsName, MODE_PRIVATE).getString("id", "id");
+
+        editor = getSharedPreferences(sharedPrefsName, MODE_PRIVATE).edit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -89,21 +95,35 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_posts) {
             swapFragment(new postsFragment());
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.nav_profile) {
             swapFragment(new profileFragment());
+            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.nav_map) {
             swapFragment(new mapFragment());
+            drawer.closeDrawer(GravityCompat.START);
         }else if (id == R.id.nav_chatroom){
             swapFragment(new chatRoomFragment());
+            drawer.closeDrawer(GravityCompat.START);
+        }else if(id == R.id.nav_logout){
+            logout();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void logout(){
+        LoginManager.getInstance().logOut();
+        editor.putBoolean("hasLoggedIn", false).commit();
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }
