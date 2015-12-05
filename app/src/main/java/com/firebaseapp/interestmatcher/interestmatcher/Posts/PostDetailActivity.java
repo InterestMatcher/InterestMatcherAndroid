@@ -127,7 +127,7 @@ public class PostDetailActivity extends AppCompatActivity {
         Firebase newCommentRef = new Firebase("https://interestmatcher.firebaseio.com/comments").child(firebaseKey);
         Firebase pushCommentRef = newCommentRef.push();
 
-        String commentContent = commentBox.getText().toString();
+        String commentContent = commentBox.getText().toString().trim();
         if(commentContent.length() <= 0){
             Toast.makeText(getApplicationContext(), "Please enter a valid comment", Toast.LENGTH_SHORT).show();
         }else{

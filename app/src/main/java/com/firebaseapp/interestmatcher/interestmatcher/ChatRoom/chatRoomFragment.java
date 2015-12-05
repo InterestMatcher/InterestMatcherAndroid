@@ -52,7 +52,7 @@ public class chatRoomFragment extends Fragment {
                 submitPostButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        makeNewPost();
+                        makeNewChat();
                     }
                 });
                 dialog.show();
@@ -90,15 +90,16 @@ public class chatRoomFragment extends Fragment {
         });
     }
 
-    private void makeNewPost(){
+    private void makeNewChat(){
         Firebase ref = new Firebase("https://interestmatcher.firebaseio.com/chatrooms/public");
 
         String messageBody = messageContent.getText().toString();
-        if(messageBody.length() == 0){
+        String adjusted = messageBody.trim();
+        if(adjusted.length() == 0){
             Toast.makeText(getContext(), "Please enter a valid message", Toast.LENGTH_SHORT).show();
         }else{
             chatMessage newChat = new chatMessage();
-            newChat.setContent(messageBody);
+            newChat.setContent(adjusted);
             newChat.setAuthor(MainActivity.userName);
             newChat.setFacebookID(MainActivity.id);
 
