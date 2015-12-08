@@ -9,10 +9,12 @@
     <TextView
         android:id="@+id/postDetailTitle"
         android:text="Title"
-        android:textSize="38sp"
+        android:textSize="35sp"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -35,8 +37,10 @@
     <TextView
         android:id="@+id/postDetailContent"
         android:text="Content"
-        android:textSize="27sp"
+        android:textSize="23sp"
         android:layout_gravity="center_horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
