@@ -2,6 +2,9 @@ package com.firebaseapp.interestmatcher.interestmatcher.Posts;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * Created by tommypacker for HackIllinois' 2016 Clue Hunt
  */
@@ -15,6 +18,7 @@ public class Post {
     private String authorID;
     private int interested;
     private int numberOfComments;
+    private HashMap<String, String> interestedPeople;
 
     public Post(){}
 
@@ -55,5 +59,7 @@ public class Post {
     public int getInterested(){return interested;}
 
     public int getNumberOfComments(){return numberOfComments;}
+
+    public HashMap<String, String> getInterestedPeople(){return interestedPeople;}
 
 }
