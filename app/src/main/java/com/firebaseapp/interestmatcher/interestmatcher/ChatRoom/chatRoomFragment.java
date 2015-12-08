@@ -34,6 +34,7 @@ public class chatRoomFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.chatroom_layout, parent, false);
+        Firebase.setAndroidContext(getContext());
         ListView chatList = (ListView) view.findViewById(R.id.chatList);
         chatMessages = new ArrayList<>();
         populateChatRoom();

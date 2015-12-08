@@ -45,6 +45,7 @@ public class postsFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.post_fragment, parent, false);
+        Firebase.setAndroidContext(getContext());
         ListView postsList = (ListView) view.findViewById(R.id.postsList);
         posts = new ArrayList<>();
         populatePosts();

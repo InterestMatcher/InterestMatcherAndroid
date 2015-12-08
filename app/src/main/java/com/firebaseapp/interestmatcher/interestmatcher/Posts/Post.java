@@ -13,6 +13,8 @@ public class Post {
     private String date;
     private String title;
     private String authorID;
+    private int interested;
+    private int numberOfComments;
 
     public Post(){}
 
@@ -49,5 +51,9 @@ public class Post {
     public void setAuthorID(String authorID){
         this.authorID = authorID;
     }
+
+    public int getInterested(){return interested;}
+
+    public int getNumberOfComments(){return numberOfComments;}
 
 }

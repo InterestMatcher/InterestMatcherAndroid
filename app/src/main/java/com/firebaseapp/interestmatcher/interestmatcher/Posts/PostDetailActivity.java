@@ -47,6 +47,7 @@ public class PostDetailActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        Firebase.setAndroidContext(this);
         setContentView(R.layout.post_detail_layout);
 
         postTitle = (TextView) findViewById(R.id.postDetailTitle);
